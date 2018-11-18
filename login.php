@@ -10,18 +10,113 @@
 	<?php include("./php/nav.php"); ?>
 	<div id = "content">
 		<div id="loginForm">
-				<form>
-					<div class="form-group">
-						<label for="exampleInputEmail1">Email address</label>
-						<input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-						<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+			<form>
+				<div class="form-row">
+					<div class="col-md-4 mb-3">
+						<label for="validationServer01">Full name</label>
+						<input type="text" class="form-control is-valid" id="validationServer01" placeholder="Full name" required>
+						<div class="valid-feedback">
+							Looks good!
+						</div>
 					</div>
-					<div class="form-group">
-						<label for="exampleInputPassword1">Password</label>
-						<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+					<div class="col-md-4 mb-3">
+						<label for="validationServer02">State code</label>
+						<input type="text" class="form-control is-valid" id="validationServer02" placeholder="XX/XXX/XXXX" required>
+						<div class="valid-feedback">
+							Looks good!
+						</div>
 					</div>
-					<button type="submit" class="btn btn-primary">Submit</button>
-				</form>
+					<div class="col-md-4 mb-3">
+						<label for="validationServerUsername">Callup Number</label>
+						<div class="input-group">
+							<input type="text" class="form-control is-invalid" id="validationServerUsername" placeholder="NYSC/XXX/XXXX/XXXXXX" required>
+							<div class="invalid-feedback">
+								Please choose a username.
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="col-md-4 mb-3">
+						<label for="validationServer03">Email</label>
+						<input type="email" class="form-control is-invalid" id="validationServer03" placeholder="Email" required>
+						<div class="invalid-feedback">
+							Please provide a valid city.
+						</div>
+					</div>
+					<div class="col-md-4 mb-3">
+						<label for="inputState">State</label>
+						<select id="inputState" class="form-control">
+							<option selected>Choose...</option>
+							<option>...</option>
+						</select>
+						<div class="invalid-feedback">
+							Please provide a valid state.
+						</div>
+					</div>
+					<div class="col-md-4 mb-3">
+						<label for="validationServer05">Local Government</label>
+						<input type="text" class="form-control is-invalid" id="validationServer05" placeholder="Zip" required>
+						<div class="invalid-feedback">
+							Please provide a valid zip.
+						</div>
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="col-md-4 mb-3">
+						<label for="validationServer03">PPA</label>
+						<textarea name="ppa" class="form-control" aria-label="With textarea"></textarea>
+						<div class="invalid-feedback">
+							Please provide a valid city.
+						</div>
+					</div>
+					<div class="col-md-4 mb-3">
+						<label for="inputState">Year of Entry</label>
+						<select id="inputState" class="form-control">
+							<option selected>Choose...</option>
+							<option>...</option>
+						</select>
+						<div class="invalid-feedback">
+							Please provide a valid state.
+						</div>
+					</div>
+					<div class="col-md-4 mb-3">
+						<label for="validationServer05">Batch and Stream</label>
+						<input type="text" class="form-control is-invalid" id="validationServer05" placeholder="Batch" required>
+						<div class="invalid-feedback">
+							Please provide a valid zip.
+						</div>
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="col-md-6 mb-3">
+						<label for="validationServer03">Password</label>
+						<input type="password" class="form-control is-invalid" id="validationServer03" placeholder="Password" required>
+						<div class="invalid-feedback">
+							Please provide a valid city.
+						</div>
+					</div>
+					<div class="col-md-6 mb-3">
+						<label for="validationServer03">Confirm Password</label>
+						<input type="password" class="form-control is-invalid" id="validationServer03" placeholder="Confirm password" required>
+						<div class="invalid-feedback">
+							Please provide a valid city.
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="form-check">
+						<input class="form-check-input is-invalid" type="checkbox" value="" id="invalidCheck3" required>
+						<label class="form-check-label" for="invalidCheck3">
+							Agree to terms and conditions
+						</label>
+						<div class="invalid-feedback">
+							You must agree before submitting.
+						</div>
+					</div>
+				</div>
+				<button class="btn btn-primary" type="submit">Submit form</button>
+			</form>
 		</div>
 	</div>
 	<?php include("./php/footer.php"); ?>

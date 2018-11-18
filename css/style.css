@@ -26,6 +26,7 @@ a:link {
 }
 
  #content{
+ 	width: 100%;
  	min-height: 100px;
  	margin: 5px;
  	overflow: auto;
