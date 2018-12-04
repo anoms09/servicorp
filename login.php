@@ -1,4 +1,44 @@
 <?php
+	if (isset($_POST['submit_login'])){
+		$state_code=$_POST['state_Code']; $logpassword=$_POST['logPassword'];		$logpassword = md5($logpassword); 		
+		include("./php/connection.php");
+		
+		$db_selected=mysqli_select_db($con, myDBis);
+		if (!$db_selected){
+			die('Error: Can Not Connect To '.myDBis.':'.mysqli_error($con));
+		}else{
+			$query="SELECT  * FROM corp_member where state_code='$state_code'";	
+			$runquery=mysqli_query($con, $query);
+			if (!$runquery){
+				die('Error: '.mysqli_error($con));
+			}else{
+				$numofuser=mysqli_num_rows($runquery);
+				if($numofuser!=1){
+					echo "<script>";
+					echo " alert('User Not Found.');      
+					window.location.href='".('./login.php')."'; </script>";
+				}else{
+					while ($row=mysqli_fetch_array($runquery)){
+						$get_name=$row['name'];
+						$get_password=$row['password'];
+					}
+					if ($get_password!=$logpassword){
+						echo "<script>";
+						echo " alert('Incorrect Password.');      
+						window.location.href='".('./login.php')."'; </script>";
+					}else{
+						$userdetails =array ($getname,$state_code);
+						session_start();
+						$_SESSION['corperDetails'] = $userdetails;
+						echo "<script>";
+						echo " alert('Welcome $get_name.');      
+						window.location.href='".('./index.php')."'; </script>";
+					}
+				}
+			}
+		}
+	}
+
 	if (isset($_POST['submit_signup'])){
 		$name=$_POST['full_name'];	$statecode=$_POST['stateCode'];	$callUpNumber=$_POST['callUpNumber'];	$email=$_POST['email'];
 		$password=$_POST['password'];	$password = md5($password);	$state=$_POST['state']; $year=$_POST['yearOfEntry']; $ppa=$_POST['ppa'];$lga=$_POST['lga']; $batch=$_POST['batch'];
@@ -36,10 +76,31 @@
 	<link href="./css/style.css" rel="stylesheet" type="text/css" media="screen"/>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 </head>
-<body>
+<body id="body" onload="login()">
 	<?php include("./php/nav.php"); ?>
 	<div id = "content">
 		<div id="loginForm">
+			<form name="loginForm" method="post" action="" class="form-group">
+				<div class="form-row">
+					<div class="col-md-6 mb-3">
+						<label for="state_code">State code</label>
+						<input type="text" class="form-control" name="state_Code" id="state_code" placeholder="XX/XXX/XXXX" required>
+					</div>
+					<div class="col-md-6 mb-3">
+						<label for="password">Password</label>
+						<input type="password" class="form-control" id="password" placeholder="Password" name="logPassword" required>
+					</div>
+				</div>
+				<button class="btn btn-primary" type="submit" name="submit_login">Sign In</button>
+				<div class="form-row">
+					<div class="col-md-6 mb-3">
+						<label for="state_code">Don't have an account? Click</label>
+						<button class="btn btn-light" type="button" name="viewSignup" onclick="signup()">here</button>
+					</div>
+				</div>
+			</form>
+		</div>
+		<div id="signUpForm">
 			<form name="signUpForm" method="post" action="" class="form-group" onsubmit="return signUpValidation();">
 				<div class="form-row">
 					<div class="col-md-4 mb-3">
@@ -109,6 +170,16 @@
 	<?php include("./php/footer.php"); ?>
 
 <script type="text/javascript">
+	function signup(){
+		document.getElementById('signUpForm').style.display="block";
+		document.getElementById('loginForm').style.display="none";	
+	}
+
+	function login(){
+		document.getElementById('signUpForm').style.display="none";
+		document.getElementById('loginForm').style.display="block";	
+	}
+
 	function signUpValidation(){
 		var state_Check= document.forms["signUpForm"]["state"].value;
 		var year_Check= document.forms["signUpForm"]["year_of_entry"].value;
